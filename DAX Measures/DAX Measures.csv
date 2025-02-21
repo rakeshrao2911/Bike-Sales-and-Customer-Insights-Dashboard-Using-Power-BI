@@ -1,0 +1,196 @@
+ID,TableID,Name,Description,DataType,Expression,FormatString,IsHidden,State,ModifiedTime,StructureModifiedTime,KPIID,IsSimpleMeasure,ErrorMessage,DisplayFolder,DetailRowsDefinitionID,DataCategory,LineageTag,SourceLineageTag
+133,34,"Order Quantity","",6,"SUM('Sales Data'[OrderQuantity])","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","a555e48e-0166-4e88-beda-d9d24dab18ca",""
+134,34,"Return Quantity","",6,"SUM('Returns Data'[ReturnQuantity])","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","71ec869b-9290-4214-858f-cfc58827719f",""
+135,34,"Average Retail Price","",10,"AVERAGE('Product Lookup'[ProductPrice])","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","24812426-a6e7-4791-aa2b-44fdc101da78",""
+136,34,"Total Returns","",6,"Count('Returns Data'[ReturnQuantity])","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","e63c3595-7e28-43d0-9c5c-ec05cc833cbe",""
+137,34,"Total Orders","",6,"DISTINCTCOUNT('Sales Data'[OrderNumber])","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","e441000e-3195-4995-bcb1-3e8e5993218f",""
+138,34,"Total Customers","",6,"DISTINCTCOUNT('Sales Data'[CustomerKey])","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","f4c27051-d3c0-4498-bef0-e3900fc6ee0a",""
+139,34,"Return Rate","",20,"DIVIDE([Return Quantity],[Order Quantity],""No sales"")","0.00%;-0.00%;0.00%",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","e49a0909-79f4-486a-ade9-eca428834e0c",""
+140,34,"Bulk Orders","",6,"
+CALCULATE(
+    [Total Orders],
+    'Sales Data'[OrderQuantity]>1
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","a0c40a57-4575-465b-a9f1-c83072f2a10f",""
+141,34,"Weekend Orders","",6,"
+CALCULATE(
+    [Total Orders],
+    'Calendar Lookup'[Weekend]=""Weekend""
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","62603cc8-f1a3-44a8-b2c9-9e96367de61c",""
+142,34,"Bike Returns","",6,"
+CALCULATE(
+    [Total Returns],
+    'Product Categories Lookup'[CategoryName]= ""Bikes""
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","86800871-c0fd-428e-ab84-9648463e7daf",""
+143,34,"Bike Sales","",6,"
+CALCULATE(
+    [Order Quantity],
+    'Product Categories Lookup'[CategoryName]=""Bikes""
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","2c847523-c7c8-4627-9b24-d50940227bd5",""
+144,34,"Bike Return Rate","",20,"
+CALCULATE(
+    [Return Rate],
+    'Product Categories Lookup'[CategoryName]=""Bikes""
+)","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","fbbb5414-373a-42d0-9105-a60272a58acb",""
+145,34,"All Orders","",6,"
+CALCULATE(
+    [Total Orders],
+    ALL(
+        'Sales Data'
+    )
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","79600544-980d-4030-935b-b5300e832338",""
+146,34,"% All Orders","",8,"
+DIVIDE(
+    [Total Orders], [All Orders]
+)","0.00%;-0.00%;0.00%",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","911bab1c-a544-412a-b9a5-b7f460308c7a",""
+147,34,"Over all Average Price","",10,"
+CALCULATE(
+    [Average Retail Price],
+    ALL(
+        'Product Lookup'
+    )
+)","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","ea8df182-6fc7-4122-9fde-63cf1f8bda4b",""
+148,34,"All Returns","",6,"
+CALCULATE(
+    [Total Returns],
+    ALL(
+        'Returns Data'
+    )
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","b99a4ea3-1499-4874-9b0e-8927c9ccf007",""
+149,34,"% All Returns","",8,"DIVIDE([Total Returns],[All Returns])","0.00%;-0.00%;0.00%",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","e82c4237-7bb8-42f9-a06d-80fe6e045f6f",""
+150,34,"High Ticket Orders","",6,"
+CALCULATE(
+    [Total Orders],
+    Filter(
+        'Product Lookup',
+        'Product Lookup'[ProductPrice]>[Average Retail Price]
+    )
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","5d1a3a7a-cb26-4f0f-8bc8-8d03a825f0a9",""
+151,34,"Total Revenue","",10,"
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*'Sales Data'[Retail Price]
+)","\$#,0.00;(\$#,0.00);\$#,0.00",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","fce5cdda-7d44-4cb8-b238-16ba61c5c702",""
+152,34,"Average Revenue Per Customer","",10,"DIVIDE([Total Revenue],[Total Customers])","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","b122c03f-1b43-4e7a-b277-185539670f5f",""
+153,34,"Total Cost","",10,"
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*
+    Related(
+        'Product Lookup'[ProductCost]
+    )
+)","\$#,0;(\$#,0);\$#,0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","d188cd37-283f-4d7d-b332-bb476068d530",""
+154,34,"Total Profit","",10,"([Total Revenue]-[Total Cost])","\$#,0;(\$#,0);\$#,0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","e2f120ab-f15d-40d9-a2bf-e6e91d700b13",""
+155,34,"YTD Revenue","",10,"
+CALCULATE(
+    [Total Revenue],
+    DATESYTD(
+        'Calendar Lookup'[Date]
+    )
+)","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","76a7aa09-43f4-4a3b-a60e-db5426be2e3b",""
+156,34,"Previous Month Revenue","",10,"
+CALCULATE(
+    [Total Revenue],
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)","\$#,0.00;(\$#,0.00);\$#,0.00",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","7b46a12f-afeb-43c3-89e5-062c9f3245c0",""
+157,34,"Revenue Target","",10,"[Previous Month Revenue]*1.1","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","5e89a097-284c-493a-90b3-b6734b4ad8cf",""
+158,34,"10 Days Rolling Revenue","",10,"
+CALCULATE(
+    [Total Revenue],
+    DATESINPERIOD(
+        'Calendar Lookup'[Date],
+        MAX(
+            'Calendar Lookup'[Date]
+        ),
+        -10,
+        DAY
+    )
+)
+    
+","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","b5f5b269-4536-4cf1-8585-1368e3a25f0e",""
+159,34,"Previous Month Returns","",6,"
+CALCULATE(
+    [Total Returns],
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","1c5125e6-2cd9-4e57-af6a-8748565f6f83",""
+160,34,"Previous Month Orders","",6,"
+CALCULATE(
+    [Total Orders],
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)","0",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","70999dd1-1545-40e6-9f69-ca6ba4d12e5c",""
+161,34,"Order Target","",8,"[Previous Month Orders]*1.1","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","ad8bcda2-9c61-4ad6-8c48-ccb3bcfa70ad",""
+162,34,"Previous Month Cost","",10,"
+CALCULATE(
+    [Total Cost],
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","eba6587b-9c14-42af-9b35-851b2da7212a",""
+163,34,"Previous Month Profit","",10,"[Previous Month Revenue]-[Previous Month Cost]","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","1ce9be6f-5f57-4ae3-b71f-bc6d1bce4faf",""
+164,34,"Profit Target","",10,"[Previous Month Profit]*1.1","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","c592ecd6-2deb-43e3-b817-f6b724d128d9",""
+165,34,"90 Days Rolling Profit","",10,"
+CALCULATE(
+    [Total Profit],
+    DATESINPERIOD(
+        'Calendar Lookup'[Date],
+        MAX(
+            'Calendar Lookup'[Date]
+        ),
+        -10,
+        DAY
+    )
+)
+    
+","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","8ea71dde-1b51-47e3-b023-7d48a6113808",""
+166,34,"Total Orders (Customer Detail)","",20,"
+IF(
+    HASONEVALUE(
+        'Customer Lookup'[CustomerKey]
+    ),
+    [Total Orders],
+    ""_""
+)","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","fadf4a98-a3a3-4b58-bed1-c33edc85a327",""
+167,34,"Total Revenue (Customer Detail)","",20,"
+IF(
+    HASONEVALUE(
+        'Customer Lookup'[CustomerKey]
+    ),
+    [Total Revenue],
+    ""_""
+)","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","8c55905d-e0b3-4bc1-9bc9-65926590809d",""
+168,34,"Full Name (Customer Detail)","",2,"
+IF(
+    HASONEVALUE(
+        'Customer Lookup'[CustomerKey]
+    ),
+    MAX(
+        'Customer Lookup'[CustomerFullName]
+    ),
+    ""Multiple Customers""
+)","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","ee6206be-d253-445d-b641-8174d1b4888b",""
+169,34,"Target Order Gap","",8,"[Total Orders]-[Order Target]","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","d28a1940-dbac-4496-bcc0-93e6642d82ce",""
+170,34,"Target Revenue Gap","",10,"[Total Revenue]-[Revenue Target]
+","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","c66a4744-11b8-4249-9ca2-935614d1d837",""
+171,34,"Target Profit Gap","",10,"[Total Profit] -[Profit Target]","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","9f1db387-1615-4672-ae26-a2b095a4af6a",""
+172,34,"Adjusted Price","",10,"[Average Retail Price] * (1+'Price Adjustment (%)'[Price Adjustment (%) Value])","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","212cfefc-77e4-4b44-90c4-afda47dbc224",""
+173,34,"Adjusted Revenue","",10,"
+SUMX(
+    'Sales Data',
+    'Sales Data'[OrderQuantity]*
+    [Adjusted Price]
+)","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","77588b94-d4ef-4023-8465-6db5cc64d242",""
+174,34,"Adjusted Profit","",10,"([Adjusted Revenue]-[Total Cost])","\$#,0.###############;(\$#,0.###############);\$#,0.###############",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","f7295314-0441-4818-a596-4a59ad40cd44",""
+175,37,"Price Adjustment (%) Value","",8,"SELECTEDVALUE('Price Adjustment (%)'[Price Adjustment (%)], 0)","",False,1,2025-02-19 18:17:16.650,2025-02-19 18:17:15.570,,False,"","",,"","be207108-3198-4f58-be13-44df41b1ff67",""
