@@ -1,9 +1,7 @@
 # Bike-Sales-and-Customer-Insights-Dashboard-Using-Power-BI
 Bike Sales and Customer Insights Dashboard Using Power BI
 
-
-https://github.com/user-attachments/assets/b0bae963-044c-47ab-a562-e803813a4037
-
+https://github.com/user-attachments/assets/87d400bb-202b-4216-a2cd-e5816e6ee7aa
 
 **Project Overview:**
 This Project uses Power BI to address significant challenges in sales performance, customer segmentation and operational efficiency. Dashboard developed as a part of this project transform raw sales data into actionable insights  and also enhances decision making for inventory management, targeted marketing and resource allocation.
@@ -32,10 +30,14 @@ Performed data cleansing using Power Query Editor:
 - Applied transformations such as column splitting, merging, and calculated fields.
 
 **Data Modeling**
+
+![image](https://github.com/user-attachments/assets/30968977-25bf-420b-a8fb-1d469149b205)
+
 - Implemented a data model using a star and snowflake schema with Fact (Sales) and Dimension (Customers, Products, Territories, Calendar) tables.
 - Established relationships using Primary and Foreign Keys.
 - Optimized cardinality (one-to-many or many-to-one relationships) for efficient filtering.
 - Applied bi-directional filters where necessary to ensure proper data flow.
+  
 
 **Calculated Fields with DAX**
 - Created calculated columns for new fields (e.g., extracting SKU categories, categorizing income levels).
